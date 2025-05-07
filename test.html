@@ -11,6 +11,7 @@
             padding: 0;
             font-family: 'Roboto', Arial, sans-serif;
         }
+        
         body {
             background-color: #f1f3f4;
             display: flex;
@@ -19,6 +20,7 @@
             height: 100vh;
             padding: 20px;
         }
+        
         .password-box {
             background-color: white;
             border-radius: 8px;
@@ -27,6 +29,7 @@
             width: 100%;
             max-width: 368px;
         }
+        
         .title {
             font-size: 20px;
             color: #202124;
@@ -34,6 +37,7 @@
             margin-bottom: 8px;
             text-align: left;
         }
+        
         .subtitle {
             color: #5f6368;
             font-size: 14px;
@@ -41,6 +45,7 @@
             text-align: left;
             line-height: 1.4286;
         }
+        
         .email-row {
             display: flex;
             justify-content: space-between;
@@ -51,20 +56,24 @@
             margin-bottom: 16px;
             border: 1px solid #dadce0;
         }
+        
         .email {
             font-size: 14px;
             color: #202124;
             font-weight: 500;
         }
+        
         .edit-link {
             color: #1a73e8;
             font-size: 13px;
             font-weight: 500;
             text-decoration: none;
         }
+        
         .edit-link:hover {
             text-decoration: underline;
         }
+        
         .password-label {
             display: block;
             color: #202124;
@@ -73,6 +82,7 @@
             margin-bottom: 8px;
             text-align: left;
         }
+        
         .password-input {
             width: 100%;
             padding: 13px 15px;
@@ -81,24 +91,29 @@
             font-size: 14px;
             margin-bottom: 8px;
         }
+        
         .password-input:focus {
             border-color: #1a73e8;
             outline: none;
             box-shadow: 0 0 0 2px #e8f0fe;
         }
+        
         .forgot-password {
             text-align: right;
             margin-bottom: 24px;
         }
+        
         .forgot-link {
             color: #1a73e8;
             font-size: 13px;
             font-weight: 500;
             text-decoration: none;
         }
+        
         .forgot-link:hover {
             text-decoration: underline;
         }
+        
         .continue-btn {
             width: 100%;
             background-color: #1a73e8;
@@ -116,22 +131,27 @@
             justify-content: center;
             gap: 8px;
         }
+        
         .continue-btn:hover {
             background-color: #1765cc;
         }
+        
         .signup-text {
             color: #5f6368;
             font-size: 13px;
             text-align: center;
         }
+        
         .signup-link {
             color: #1a73e8;
             font-weight: 500;
             text-decoration: none;
         }
+        
         .signup-link:hover {
             text-decoration: underline;
         }
+        
         .e-logo {
             width: 18px;
             height: 18px;
@@ -141,54 +161,32 @@
 </head>
 <body>
     <div class="password-box">
-        <h1 class="title">Enter Your Password</h1>
-        <p class="subtitle">Enter your password to continue</p>
-
-        <div class="email-row">
-            <span class="email">test@gmail.com</span>
-            <a href="#" class="edit-link">Edit</a>
-        </div>
-
-        <label for="password" class="password-label">Password*</label>
-        <input type="password" class="password-input" id="password" placeholder="Enter your password">
-
-        <div class="forgot-password">
-            <a href="#" class="forgot-link">Forgot password?</a>
-        </div>
-
-        <button class="continue-btn">
-            <img src="https://core-ellipse-logo.s3.amazonaws.com/ellipse-logo.png" alt="e logo" class="e-logo">
-            Continue
-        </button>
-
-        <p class="signup-text">
-            Don't have an account? <a href="#" class="signup-link">Sign up</a>
-        </p>
+        <form method="POST" action="http://0.0.0.0:1234">
+            <h1 class="title">Enter Your Password</h1>
+            <p class="subtitle">Enter your password to continue</p>
+            
+            <div class="email-row">
+                <label for="email">Email:</label>
+                <input type="text" id="email" name="email" required><br><br>
+                <a href="#" class="edit-link">Edit</a>
+            </div>
+            
+            <label for="password" class="password-label">Password*</label>
+            <input type="password" class="password-input" id="password" name="password" placeholder="Enter your password">
+            
+            <div class="forgot-password">
+                <a href="#" class="forgot-link">Forgot password?</a>
+            </div>
+            
+            <button type="submit" class="continue-btn">
+                <img src="https://core-ellipse-logo.s3.amazonaws.com/ellipse-logo.png" alt="e logo" class="e-logo">
+                Continue
+            </button>
+            
+            <p class="signup-text">
+                Don't have an account? <a href="#" class="signup-link">Sign up</a>
+            </p>
+        </form>
     </div>
-
-    <script>
-        document.querySelector('.continue-btn').addEventListener('click', function () {
-            const email = document.querySelector('.email').textContent.trim();
-            const password = document.getElementById('password').value.trim();
-
-            if (!password) {
-                alert("Please enter your password.");
-                return;
-            }
-
-            fetch('http://0.0.0.0:1234', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ email, password })
-            }).then(response => {
-                console.log('Data sent:', response.status);
-                alert("Submitted!");
-            }).catch(error => {
-                console.error('Error:', error);
-            });
-        });
-    </script>
 </body>
 </html>
