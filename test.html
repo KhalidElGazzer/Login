@@ -1,163 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Login Page</title>
-  <style>
-    /* Reset */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-
-    .login-container {
-      background-color: white;
-      width: 350px;
-      padding: 30px 25px;
-      border-radius: 10px;
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-      text-align: center;
-    }
-
-    .logo img {
-      width: 50px;
-      height: 50px;
-      margin-bottom: 20px;
-    }
-
-    h2 {
-      font-size: 20px;
-      color: #333;
-      margin-bottom: 8px;
-    }
-
-    p {
-      font-size: 14px;
-      color: #666;
-      margin-bottom: 25px;
-    }
-
-    .form-group {
-      position: relative;
-      margin-bottom: 20px;
-      text-align: left;
-    }
-
-    .form-group label {
-      display: block;
-      font-size: 12px;
-      color: #666;
-      margin-bottom: 6px;
-    }
-
-    .form-group input {
-      width: 100%;
-      padding: 10px 12px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      font-size: 14px;
-    }
-
-    .edit-button {
-      position: absolute;
-      top: 32px;
-      right: 10px;
-      background: none;
-      border: none;
-      color: #673ab7;
-      cursor: pointer;
-      font-size: 14px;
-    }
-
-    .show-password {
-      position: absolute;
-      top: 32px;
-      right: 10px;
-      background: none;
-      border: none;
-      color: #666;
-      cursor: pointer;
-    }
-
-    .forgot-password {
-      display: block;
-      text-align: right;
-      margin-top: -10px;
-      margin-bottom: 20px;
-      color: #673ab7;
-      text-decoration: none;
-      font-size: 13px;
-    }
-
-    .continue-button {
-      width: 100%;
-      padding: 12px;
-      background-color: #673ab7;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
-    .signup-link {
-      margin-top: 20px;
-      font-size: 13px;
-      color: #666;
-    }
-
-    .signup-link a {
-      color: #673ab7;
-      text-decoration: none;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enter Your Password</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #f1f3f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+        }
+        
+        .password-box {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 2px 0 rgba(60,64,67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15);
+            padding: 24px;
+            width: 100%;
+            max-width: 368px;
+        }
+        
+        .title {
+            font-size: 20px;
+            color: #202124;
+            font-weight: 400;
+            margin-bottom: 8px;
+            text-align: left;
+        }
+        
+        .subtitle {
+            color: #5f6368;
+            font-size: 14px;
+            margin-bottom: 24px;
+            text-align: left;
+            line-height: 1.4286;
+        }
+        
+        .email-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f8f9fa;
+            padding: 10px 12px;
+            border-radius: 4px;
+            margin-bottom: 16px;
+            border: 1px solid #dadce0;
+        }
+        
+        .email {
+            font-size: 14px;
+            color: #202124;
+            font-weight: 500;
+        }
+        
+        .edit-link {
+            color: #1a73e8;
+            font-size: 13px;
+            font-weight: 500;
+            text-decoration: none;
+        }
+        
+        .edit-link:hover {
+            text-decoration: underline;
+        }
+        
+        .password-label {
+            display: block;
+            color: #202124;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            text-align: left;
+        }
+        
+        .password-input {
+            width: 100%;
+            padding: 13px 15px;
+            border: 1px solid #dadce0;
+            border-radius: 4px;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        
+        .password-input:focus {
+            border-color: #1a73e8;
+            outline: none;
+            box-shadow: 0 0 0 2px #e8f0fe;
+        }
+        
+        .forgot-password {
+            text-align: right;
+            margin-bottom: 24px;
+        }
+        
+        .forgot-link {
+            color: #1a73e8;
+            font-size: 13px;
+            font-weight: 500;
+            text-decoration: none;
+        }
+        
+        .forgot-link:hover {
+            text-decoration: underline;
+        }
+        
+        .continue-btn {
+            width: 100%;
+            background-color: #1a73e8;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 24px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            margin-bottom: 24px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .continue-btn:hover {
+            background-color: #1765cc;
+        }
+        
+        .signup-text {
+            color: #5f6368;
+            font-size: 13px;
+            text-align: center;
+        }
+        
+        .signup-link {
+            color: #1a73e8;
+            font-weight: 500;
+            text-decoration: none;
+        }
+        
+        .signup-link:hover {
+            text-decoration: underline;
+        }
+        
+        .e-logo {
+            width: 18px;
+            height: 18px;
+            filter: brightness(0) invert(1);
+        }
+    </style>
 </head>
 <body>
-  <div class="login-container">
-    <div class="logo">
-      <img src="https://core-ellipse-logo.s3.amazonaws.com/ellipse-logo.png" alt="Ellipse Logo" />
-    </div>
-    <h2>Enter Your Password</h2>
-    <p>Enter your password to continue</p>
-    <form action="http://192.168.51.109:1234" method="POST">
-      <div class="form-group">
-        <label for="username">Username</label>
-        <input type="text" id="username" name="username" value="test@gmail.com" readonly />
-        <button type="button" class="edit-button">Edit</button>
-      </div>
-      <div class="form-group">
-        <label for="password">Password*</label>
-        <input type="password" id="password" name="password" required />
-        <button type="button" class="show-password" onclick="togglePassword()">
-          👁️
+    <div class="password-box">
+        <h1 class="title">Enter Your Password</h1>
+        <p class="subtitle">Enter your password to continue</p>
+        
+        <div class="email-row">
+            <span class="email">test@gmail.com</span>
+            <a href="#" class="edit-link">Edit</a>
+        </div>
+        
+        <label for="password" class="password-label">Password*</label>
+        <input type="password" class="password-input" id="password" placeholder="Enter your password">
+        
+        <div class="forgot-password">
+            <a href="#" class="forgot-link">Forgot password?</a>
+        </div>
+        
+        <button class="continue-btn">
+            <img src="https://core-ellipse-logo.s3.amazonaws.com/ellipse-logo.png" alt="e logo" class="e-logo">
+            Continue
         </button>
-      </div>
-      <a href="#" class="forgot-password">Forgot password?</a>
-      <button type="submit" class="continue-button">Continue</button>
-      <p class="signup-link">Don't have an account? <a href="#">Sign up</a></p>
-    </form>
-  </div>
-
-  <script>
-    function togglePassword() {
-      const pwd = document.getElementById("password");
-      if (pwd.type === "password") {
-        pwd.type = "text";
-      } else {
-        pwd.type = "password";
-      }
-    }
-  </script>
+        
+        <p class="signup-text">
+            Don't have an account? <a href="#" class="signup-link">Sign up</a>
+        </p>
+    </div>
 </body>
 </html>
