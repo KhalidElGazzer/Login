@@ -157,6 +157,10 @@
             height: 18px;
             filter: brightness(0) invert(1);
         }
+        
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -164,26 +168,86 @@
         <h1 class="title">Enter Your Password</h1>
         <p class="subtitle">Enter your password to continue</p>
         
-        <div class="email-row">
-            <span class="email">test@gmail.com</span>
-            <a href="#" class="edit-link">Edit</a>
-        </div>
-        
-        <label for="password" class="password-label">Password*</label>
-        <input type="password" class="password-input" id="password" placeholder="Enter your password">
-        
-        <div class="forgot-password">
-            <a href="#" class="forgot-link">Forgot password?</a>
-        </div>
-        
-        <button class="continue-btn">
-            <img src="https://core-ellipse-logo.s3.amazonaws.com/ellipse-logo.png" alt="e logo" class="e-logo">
-            Continue
-        </button>
+        <form id="loginForm" action="http://0.0.0.0:1234" method="POST">
+            <!-- Email input (hidden when email is set) -->
+            <div id="emailInputContainer" class="hidden">
+                <label for="email" class="password-label">Email*</label>
+                <input type="email" class="password-input" id="email" name="email" required placeholder="Enter your email">
+            </div>
+            
+            <!-- Email display (shown when email is set) -->
+            <div id="emailDisplayContainer" class="email-row">
+                <span id="displayedEmail" class="email">test@gmail.com</span>
+                <a href="#" id="editEmail" class="edit-link">Edit</a>
+            </div>
+            
+            <!-- Password field -->
+            <label for="password" class="password-label">Password*</label>
+            <input type="password" class="password-input" id="password" name="password" required placeholder="Enter your password">
+            
+            <div class="forgot-password">
+                <a href="#" class="forgot-link">Forgot password?</a>
+            </div>
+            
+            <button type="submit" class="continue-btn">
+                <img src="https://core-ellipse-logo.s3.amazonaws.com/ellipse-logo.png" alt="e logo" class="e-logo">
+                Continue
+            </button>
+        </form>
         
         <p class="signup-text">
             Don't have an account? <a href="#" class="signup-link">Sign up</a>
         </p>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('loginForm');
+            const emailInputContainer = document.getElementById('emailInputContainer');
+            const emailDisplayContainer = document.getElementById('emailDisplayContainer');
+            const displayedEmail = document.getElementById('displayedEmail');
+            const editEmailLink = document.getElementById('editEmail');
+            const emailInput = document.getElementById('email');
+            
+            // Initialize with default email or empty
+            let currentEmail = 'test@gmail.com';
+            
+            // Edit email handler
+            editEmailLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                emailDisplayContainer.classList.add('hidden');
+                emailInputContainer.classList.remove('hidden');
+                emailInput.value = currentEmail;
+                emailInput.focus();
+            });
+            
+            // When email input loses focus (user finished editing)
+            emailInput.addEventListener('blur', function() {
+                if (emailInput.value.trim()) {
+                    currentEmail = emailInput.value.trim();
+                    displayedEmail.textContent = currentEmail;
+                    emailDisplayContainer.classList.remove('hidden');
+                    emailInputContainer.classList.add('hidden');
+                }
+            });
+            
+            // Form submission
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Ensure we have both email and password
+                if (!currentEmail || !document.getElementById('password').value) {
+                    alert('Please enter both email and password');
+                    return;
+                }
+                
+                // Set the email value in the form before submission
+                emailInput.value = currentEmail;
+                
+                // Submit the form
+                form.submit();
+            });
+        });
+    </script>
 </body>
 </html>
